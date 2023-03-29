@@ -8,7 +8,10 @@ Rock-Paper-Scissors is a game in which each player simultaneously shows one of t
 - Used Teachable-Machine  to start creating the model.
 - Downloaded the model from the "Tensorflow" tab in Teachable-Machine. The model is called keras_model.h5 and the text file containing the labels called labels.txt.
 
-
+# Milestone 3 
+- Before you can use the model, you need to install the libraries that it depends on.
+- Create a conda environment and then install the necessary requirements. You need opencv-python, tensorflow, and ipykernel
+Start by creating the environment, activate it, and then install pip by running the following command in your terminal conda install pip. Then, to install the rest of the libraries, run pip install 
 
 
 
