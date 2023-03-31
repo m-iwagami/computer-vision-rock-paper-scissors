@@ -39,5 +39,14 @@ def get_prediction():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         
-        if np.argmax(a, axis=0):
-            user_choice = "Rock"
+        
+        result = np.argmax(prediction) 
+        if result == [0]:
+            print("Rock")
+        elif result == [1]:
+            print("Paper")
+        elif result == [2]:
+            print("Scissors")
+        else:
+            print("Nothing")
+
