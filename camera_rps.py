@@ -2,6 +2,7 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import time
+import random
 
 model = load_model('keras_model.h5')
 cap = cv2.VideoCapture(0)
@@ -12,14 +13,9 @@ cap.release()
 # Destroy all the windows
 cv2.destroyAllWindows()
 
-#count down time
-timer = 3
-start_time = time.time()
-elapsed_time = int(time.time() - start_time)
-for x in range(elapsed_time):
-    print(timer - elapsed_time)
 
 
+#To get prediction
 def get_prediction():
     while True: 
         ret, frame = cap.read()
@@ -31,25 +27,89 @@ def get_prediction():
         cv2.imshow('frame', frame)
         # Press q to close the window
         print(prediction)
-
-        key = cv2.waitkey(1)
-        if key == ord('s'):
-            start_game = True
-            initial_time = time.time()
-        
-
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-       
-        
-        if start_game: 
-            result = np.argmax(prediction) 
-            if result == [0]:
-                result = "Rock"
-            elif result == [1]:
-                result = "Paper"
-            elif result == [2]:
-                result = "Scissors"
-            else:
-                result = "Nothing"
-            print(f"you choose {result}")
+
+#To set a 3 seconds countdown timer
+def timer():
+    start_time = time.time()
+    while time.time() - start_time < 3:
+        print(3 - int(time.time() - start_time))
+
+#To print user's gesture
+def user_choice(): 
+    result = np.argmax(prediction) 
+    if result == [0]:
+        user_choice = "Rock"
+    elif result == [1]:
+        user_choice = "Paper"
+    elif result == [2]:
+        user_choice = "Scissors"
+    else:
+        user_choice = "Nothing"
+    print(f"you choose {user_choice}")
+
+#Computer to choose their choice
+def get_computer_choice():
+    list_1 = ["Rock", "Paper", "Scissors"]
+    return(random.choice(list_1))
+
+#To keep scores
+def scores():
+    user_wins = 0
+    computer_wins = 0
+    if winner == user:
+        user_score += 1
+        if user_score == 3:
+            print("Congratulations! You won this game!")
+    if winner == computer:
+        computer_score += 1
+        if computer_score == 3:
+            print("Game over. Sorry you lost this game.")
+
+def check_rounds():
+    rounds = 5
+    while rounds >= 1:
+        get_winner()
+        rounds -= 1
+    else:
+        print("Game over! You played 5 rounds already.")
+
+
+#To compare choices and get a result and add a point
+def get_winner(computer_choice, user_choice):
+    if computer_choice == user_choice:
+        print(f"It is a tie! The other player chose{computer_choice} too!")
+    elif user_choice == "Paper":
+        if computer_choice == "Rock":
+            print(f"You won! The other player chose{computer_choice}")
+            winner = user
+        else:
+            print("Sorry, you lost. The other player chose{computer_choice}")
+            winner = computer
+
+    elif user_choice== "Scissors":
+        if computer_choice == "Paper":
+            print(f"You won! The other player chose{computer_choice}")
+            winner = user
+        else:
+            print("Sorry, you lost. The other player chose{computer_choice}")
+            winner = computer
+    elif user_choice == "Rock":
+        if computer_choice == "Scissors":
+            print(f"You won! The other player chose{computer_choice}")
+            winner = user
+        else: 
+            print("Sorry, you lost. The other player chose{computer_choice}")
+            winner = computer
+    else:
+        print("Sorry, your input was invalid")
+
+
+
+
+def play():
+    computer_choice = get_computer_choice()
+    user_choice = get_user_choice()
+    get_winner(computer_choice, user_choice)
+scores()
