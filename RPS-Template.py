@@ -1,8 +1,12 @@
-import cv2
-from keras.models import load_model
-import numpy as np
+import cv2 #the module import name for opencv-python
+from keras.models import load_model #keras model is to make prediction
+import numpy as np  # library 
+
+#Save the model to make prediction
 model = load_model('keras_model.h5')
+#To capture an image
 cap = cv2.VideoCapture(0)
+#An array object represents a multidimensional, homogeneous array of fixed-size items.
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 while True: 
