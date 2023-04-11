@@ -17,12 +17,15 @@ Start by creating the environment, activate it, and then install pip by running 
 
 ## Milestone 4
 
-
+- Added "play ()" function to play the game. 
 
 ## Conclusions
 
 ### What I learnt from this project
+- How Object Oriented Progamming(OOP) works
 - How to use Class
 - How to use method
 - How to use numpy 
 - How to recall methods in a function
+- Be familiar with CV2 
+
