@@ -12,26 +12,8 @@ Paper beats rock. The player who shows the first option that beats
 the other player's option wins. This is an implementation of an interactive 
 Rock-Paper-Scissors game, in which the user can play with the computer using the camera.
 
+"""
 
-Attributes
-__________
-
-
-Methods
-__________
-- timer
-- get_camera_image
-- get_prediction
-- user_choice
-- get_computer_choice
-- scores
-- get_winner
-
-Function
-__________
-- round
-
-    """
 class Game:
     def __init__(self):
         #Save the model to make prediction
