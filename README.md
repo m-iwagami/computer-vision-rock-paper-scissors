@@ -25,14 +25,11 @@ Start by creating the environment, activate it, and then install pip by running 
 
 
 ## Libraries
-cv2: The module import name for opencv-python. `/n`
-from keras.models load_model: Keras model is to make prediction. `/n`
-import numpy as np
-    To get a result from the prediction.
-        `prediction from the    def get_user_choice(self):`
-        `result = np.argmax(self.get_prediction())`
-import time
-import random
+`cv2`: The module import name for opencv-python. 
+`from keras.models import load_model`: Keras model is to make prediction.
+`import numpy as np`: To get a result from the prediction in `get_user_choice(self)`.`result = np.argmax(self.get_prediction())`.
+`import time`: To countdown time before the game starts.
+`import random`: To choose a computer's choice. used in `get_computer_choice(self)`
 
 
 ## Conclusions
