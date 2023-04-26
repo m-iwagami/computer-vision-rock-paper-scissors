@@ -3,12 +3,20 @@
 
 ## Description 
 Rock-Paper-Scissors is a game in which each player simultaneously shows one of three hand signals representing rock, paper, or scissors. Rock beats scissors. Scissors beats paper. Paper beats rock. The player who shows the first option that beats the other player's option wins. This is an implementation of an interactive Rock-Paper-Scissors game, in which the user can play with the computer using the camera
+## Modules
+- camera_rps.py: Main 
+- keras_model.h5: an image database imported from Teachable-Machine.
+- labels.txt: 4 gestures that are detected by the process of cerating the image database.
+- requirements.txt: this file enables any other user that wants to use your computer to easily install these exact dependencies by running pip install requirements.txt.
 
+### Additional modules
+- RPS-Template.py: original file from the aicore platform.
+- manual_rps.py: used in Milestone 3 to practice python code. 
 
 ## Learning objective
-Creating of an image database for computer vision tasks using Teachable-Machine(https://teachablemachine.withgoogle.com/).
-Setting up virtual environments and the installation of all required packages.
-The practice of intermediate Python programming - (Object Oriented Programming, numpy, time, 'if-else' statement, 'while' loops).
+- Creating of an image database for computer vision tasks using Teachable-Machine(https://teachablemachine.withgoogle.com/).
+- Setting up virtual environments and the installation of all required packages.
+- The practice of intermediate Python programming - (Object Oriented Programming, numpy, time, 'if-else' statement, 'while' loops).
 
 ## Project outline
 ### Milestone 1 & 2
