@@ -4,6 +4,8 @@ import numpy as np
 import time
 import random
 
+
+
 """
 Rock-Paper-Scissors is a game in which each player simultaneously 
 shows one of three hand signals representing rock, paper, or scissors.
@@ -12,18 +14,204 @@ Paper beats rock. The player who shows the first option that beats
 the other player's option wins. This is an implementation of an interactive 
 Rock-Paper-Scissors game, in which the user can play with the computer using the camera.
 
-Methods
-- timer: To count 3 seconds before the game starts
-- get_camera_image: To get picture of the user's choice
-- get_prediction: To get prediction using get_camera_image
-- get_user_choice: To finalize a user's gesture and print it
-- get_computer_choice: To get a computer choice from move_list
-- count_scores: count scores and print the result of the game
-- get_winner: to compare choices, to get a result, and to add a point
-
-Function 
-- play() : Count rounds and play the game 
+Attributes
+    cap: cv2.VideoCapture(0)
+        To capture an image
+    data: np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32) 
+        An array object represents a multidimensional, homogeneous array of fixed-size items
+    user_choice: self.get_prediction()
+        To predict user's gesture
+    user_computer_choice: None
+        To select computer's choise from move_list
+    user: "user"
+        Attributes the name "user" to the user.
+    computer: "computer"
+        Attributes the name "computer" to the computer.
+    winner: None  
+        To attribute winner in a method:get_winner 
+    computer_score: 0
+        To count how many cycles the computer win  
+    user_score: 0
+        To count how many cycles the userr win
+    move_list: ["Rock", "Paper", "Scissors"]
+        The computer choose a choice from this list
+    decoder: ["Rock", "Paper", "Scissors", "Nothing"]
+        a list that get_prediction method predict a user's choice
 """
+        
+
+"""
+def timer(self):
+'''
+To count 3 seconds before the game starts and print them
+
+returns: 
+time: int
+description
+'''
+    self.start_time = time.time()
+    print("")
+    print("Get ready...")
+    while time.time() - self.start_time < 3:
+        print(3 - int(time.time() - self.start_time))
+        cv2.waitKey(1000) #Note: wait for 1 sec
+    print("Go!")
+
+"""
+
+"""
+get_camera_image(self):
+'''
+To get picture of the user's choice
+
+returns: 
+normalized_image: float32 
+description
+'''
+    end_time = time.time() +1
+    while time.time() < end_time: 
+        ret, frame = self.cap.read()
+        resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+        image_np = np.array(resized_frame)
+        normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):   #Note: Press q to close the window
+            break
+    return normalized_image
+"""
+
+"""
+def get_prediction(self):
+
+'''
+To get prediction using get_camera_image
+return: 
+prediction: float32 
+description
+'''
+    self.data[0] = self.get_camera_image()
+    prediction = self.model.predict(self.data)
+    return prediction
+
+"""
+
+"""
+def get_user_choice(self): 
+'''
+Finalize a user's gesture and print it
+​
+Returns:
+user_choice: str
+description
+'''
+        result = np.argmax(self.get_prediction()) 
+        user_choice = self.decoder[result]
+        print(f"The camera predicted {self.user_choice} as your choice.")
+        return user_choice
+​
+"""
+
+"""
+def get_computer_choice(self):
+'''
+To get a computer choice from move_list
+
+returns:
+computer_choice: str
+description
+'''
+    computer_choice = (random.choice(self.move_list))
+    return computer_choice
+"""
+
+"""
+def count_scores(self):
+'''
+Count scores and print the result of the game
+
+returns:
+int:
+description
+'''        
+    winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
+    if winner == "user":
+        self.user_score += 1
+        if self.user_score == 3:
+            print("Congratulations! You won this game!")
+    if winner == "computer":
+        self.computer_score += 1
+        if self.computer_score == 3:
+            print("Game over. Sorry you lost this game.")
+"""
+
+"""
+def get_winner(self,computer_choice, user_choice,winner):
+ 
+'''
+To compare choices, to get a result, and to add a point
+
+returns:
+winner: str
+description
+ '''
+    user_choice = self.get_user_choice()
+    print(f"Your choise is {user_choice}.")
+    computer_choice = self.get_computer_choice()
+    print(f"Computer's choice is {computer_choice}.")
+    if computer_choice == user_choice:
+        print(f"It is a tie! The other player chose {computer_choice} too!")
+    elif user_choice == "Paper":
+        if computer_choice == "Rock":
+            print(f"You won! The other player chose {computer_choice}")
+            winner = self.user
+        else:
+            print(f"Sorry, you lost. The other player chose {computer_choice}")
+            winner = self.computer
+    elif user_choice== "Scissors":
+        if computer_choice == "Paper":
+            print(f"You won! The other player chose {computer_choice}")
+            winner = self.user
+        else:
+            print(f"Sorry, you lost. The other player chose {computer_choice}")
+            winner = self.computer
+    elif user_choice == "Rock":
+        if computer_choice == "Scissors":
+            print(f"You won! The other player chose {computer_choice}")
+            winner = self.user
+        else: 
+            print(f"Sorry, you lost. The other player chose {computer_choice}")
+            winner = self.computer
+    else:
+        print("Sorry, your input was invalid")
+    return winner
+"""
+
+"""
+def play():
+
+'''
+Function: Count rounds and play the game 
+
+descriprtion:
+'''
+    round_number = 1
+    game = Game()
+    while round_number <= 10:
+        game.get_camera_image()
+        print(f" This is Round {round_number}")
+        cv2.waitKey(2000)
+        game.timer()
+        game.count_scores()
+        cv2.waitKey(2000)
+        print(f"Your score is {game.user_score}, computer's score is {game.computer_score} !")
+        round_number += 1
+        if game.user_score >= 3 or game.computer_score >= 3:
+            break
+    game.cap.release()
+    game.cv2.destroyAllWindows()
+
+"""
+
 
 class Game:
     def __init__(self):
