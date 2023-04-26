@@ -25,12 +25,21 @@ Start by creating the environment, activate it, and then install pip by running 
 
 
 ## Libraries
-`cv2`: The module import name for opencv-python. 
-`from keras.models import load_model`: Keras model is to make prediction.
-`import numpy as np`: To get a result from the prediction in `get_user_choice(self)`.`result = np.argmax(self.get_prediction())`.
-`import time`: To countdown time before the game starts.
-`import random`: To choose a computer's choice. used in `get_computer_choice(self)`
+- `cv2`: The module import name for opencv-python. 
+- `from keras.models import load_model`: Keras model is to make prediction.
+- `import numpy as np`: To get a result from the prediction in `get_user_choice(self)`.`result = np.argmax(self.get_prediction())`.
+- `import time`: To countdown time before the game starts.
+- `import random`: To choose a computer's choice. used in `get_computer_choice(self)`
 
+## Requirement
+- Before you can use the model, you need to install the libraries that it depends on.
+Create a conda environment and then install the necessary requirements. You need opencv-python, tensorflow, and ipykernel
+Start by creating the environment, activate it, and then `install pip`. Then, to install the rest of the libraries, run `pip install` to install each item (opencv-python, tensorflow, and ipykernel).
+
+- After that, the libraries you have to install are the ones mentioned above.
+
+- Important: If you are on Ubuntu, the latest version of Tensorflow doens't work with the default version of Python. When creating the virtual environment, use Python 3.8 instead by running:
+conda create -n my_env python=3.8
 
 ## Conclusions
 
